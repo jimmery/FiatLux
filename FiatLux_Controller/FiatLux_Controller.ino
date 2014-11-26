@@ -1,15 +1,18 @@
 #include <Servo.h>
 
-#define ServoPin 9
+#define firstServo 9
+#define secondServo 10
 #define LEDPin 13
-Servo myServo;
+Servo botServo;
+Servo topServo;
 
 void setup()
 {
-  pinMode(ServoPin, OUTPUT);
+ // pinMode(ServoPin, OUTPUT);
   pinMode(LEDPin, OUTPUT);
   
-  myServo.attach(ServoPin);
+  botServo.attach(firstServo);
+  topServo.attach(secondServo); 
 //  myServo.write(0);
 }
 
@@ -25,15 +28,57 @@ void loop()
 //  digitalWrite(LEDPin, LOW);
 //  delay(1000);
 
+//Going up on scan grid 
+for(int phi = 0; phi < 100;){ //Change upper limit for phi
   for ( int i = 0; i < 180; i++ )
   {
-    myServo.write(i);
-    delay(15);
+    botServo.write(i);
+    delay(15); //change this for speed
+    
+  
   }
+  
+  phi+=2;
+  topServo.write(phi); //Change this increment for phi direction 
   
   for ( int i = 180; i >= 0; i-- )
   {
-    myServo.write(i);
+    botServo.write(i);
     delay(15);
+   
   }  
+  
+  phi+=2;
+  topServo.write(phi); //Change this increment for phi direction 
+}  
+
+
+
+
+//Going down on scan grid
+for(int phi = 100; phi >0;){ //Change upper limit for phi
+  for ( int i = 0; i < 180; i++ )
+  {
+    botServo.write(i);
+    delay(15); //change this for speed
+    
+  
+  }
+  
+  phi-=2;
+  topServo.write(phi); //Change this increment for phi direction 
+  
+  for ( int i = 180; i >= 0; i-- )
+  {
+    botServo.write(i);
+    delay(15);
+   
+  }  
+  
+  phi-=2;
+  topServo.write(phi); //Change this increment for phi direction 
+}  
+ 
 }
+
+
