@@ -1,18 +1,23 @@
 #include <Servo.h>
 
-#define firstServo 9
-#define secondServo 10
+#define bottomServo 9
+#define topServoPin 10
 #define LEDPin 13
+
+const int PHI = 16;
+const int THETA = 180;
+
 Servo botServo;
 Servo topServo;
+
 
 void setup()
 {
  // pinMode(ServoPin, OUTPUT);
   pinMode(LEDPin, OUTPUT);
   
-  botServo.attach(firstServo);
-  topServo.attach(secondServo); 
+  botServo.attach(bottomServo);
+  topServo.attach(topServoPin); 
 //  myServo.write(0);
 }
 
@@ -29,8 +34,8 @@ void loop()
 //  delay(1000);
 
 //Going up on scan grid 
-for(int phi = 0; phi < 100;){ //Change upper limit for phi
-  for ( int i = 0; i < 180; i++ )
+for(int phi = 0; phi < PHI;){ //Change upper limit for phi
+  for ( int i = 0; i < THETA; i++ )
   {
     botServo.write(i);
     delay(15); //change this for speed
@@ -41,7 +46,7 @@ for(int phi = 0; phi < 100;){ //Change upper limit for phi
   phi+=2;
   topServo.write(phi); //Change this increment for phi direction 
   
-  for ( int i = 180; i >= 0; i-- )
+  for ( int i = THETA; i >= 0; i-- )
   {
     botServo.write(i);
     delay(15);
@@ -56,8 +61,8 @@ for(int phi = 0; phi < 100;){ //Change upper limit for phi
 
 
 //Going down on scan grid
-for(int phi = 100; phi >0;){ //Change upper limit for phi
-  for ( int i = 0; i < 180; i++ )
+for(int phi = PHI; phi >0;){ //Change upper limit for phi
+  for ( int i = 0; i < THETA; i++ )
   {
     botServo.write(i);
     delay(15); //change this for speed
@@ -68,7 +73,7 @@ for(int phi = 100; phi >0;){ //Change upper limit for phi
   phi-=2;
   topServo.write(phi); //Change this increment for phi direction 
   
-  for ( int i = 180; i >= 0; i-- )
+  for ( int i = THETA; i >= 0; i-- )
   {
     botServo.write(i);
     delay(15);
