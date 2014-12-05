@@ -14,6 +14,10 @@
 // boat will reset essentially to prepare for laser input. 
 
 // laser search. 
+
+// programmed to have the default condition until a value is found.
+// returning true => angles are found. 
+// returning false => nothing is found.
 boolean thetaSearch()
 {
   bool minAngFound = false; //use this to get out of loops when angles are found
@@ -30,6 +34,7 @@ boolean thetaSearch()
         firstTheta = theta;
         minAngFound = true;
       }
+      // checks to see if there is there's a lower edge. 
       else if(data < LOW_RF_THRESHOLD && minAngFound && !maxAngFound ){
         secondTheta = theta;
         maxAngFound = true;
@@ -38,12 +43,14 @@ boolean thetaSearch()
       delay(15); //change this for speed
     }
     
+    // if there is no lower edge found, then we assume the edge is
+    // at MAX_THETA, which is the default value for secondAngle.
     if ( minAngFound )
     {
       return true;
     }
   
-    phi+=2; //Potential to change phi direction movement
+    phi+=PHI_OFFSET; //Potential to change phi direction movement
     topServo.write(phi); 
   
     for ( int theta = MAX_THETA; theta >= MIN_THETA; theta-- )
@@ -62,10 +69,12 @@ boolean thetaSearch()
       delay(15);
     }
     
+    // if there is no lower edge found, then we assume the edge is
+    // at MIN_THETA, which is the default value for secondAngle.
     if ( maxAngFound )
       return true;
   
-    phi+=2;
+    phi+=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
   }  
 
@@ -87,12 +96,14 @@ boolean thetaSearch()
       delay(15); //change this for speed
     }
     
+    // if there is no lower edge found, then we assume the edge is
+    // at MAX_THETA, which is the default value for secondAngle.
     if ( minAngFound )
     {
       return true;
     }
   
-    phi-=2;
+    phi-=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
   
     for ( int theta = MAX_THETA; theta >= MIN_THETA; theta-- )
@@ -111,13 +122,15 @@ boolean thetaSearch()
       delay(15);
     }
     
+    // if there is no lower edge found, then we assume the edge is
+    // at MIN_THETA, which is the default value for secondAngle.
     if ( maxAngFound )
       return true;  
   
-    phi-=2;
+    phi-=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
   }
-  return false;
+  return false; // no angles found
 }
 
 // search will be done with diagonal thingies. 
