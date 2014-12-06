@@ -7,7 +7,6 @@
 #define topServoPin 10
 #define LEDPin 13
 
-const int PHI_OFFSET = 2;
 const int MAX_PHI = 16;
 const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
@@ -35,10 +34,14 @@ void setup()
 
 void loop()
 {
-  // this essentially loops the default condition forever
-  // unless it finds a theta value that matches. 
-  // in which case thetaSearch returns true. 
+
+
   while (!thetaSearch());
+
+
+
+ 
+ 
 }
 
 
