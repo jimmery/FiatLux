@@ -14,18 +14,20 @@
 // boat will reset essentially to prepare for laser input. 
 
 // laser search. 
+
+
 boolean thetaSearch()
 {
   bool minAngFound = false; //use this to get out of loops when angles are found
   bool maxAngFound = false;
   
   //Going up on scan grid 
-  for(int phi = 0; phi < MAX_PHI;){ 
+  for(int phi = 0; phi < 16;){ 
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       digitalWrite(signalLEDPin, HIGH); //turn on the LED to start getting info from the boat
       botServo.write(theta);
-      data = analogRead(receiver);  //get signal from RF sent from boat 
+     data = analogRead(receiver);  //get signal from RF sent from boat 
       if(data > HIGH_RF_THRESHOLD && !minAngFound){ //check to see if boat is finding a high
         firstTheta = theta;
         minAngFound = true;
@@ -35,7 +37,7 @@ boolean thetaSearch()
         maxAngFound = true;
         return true;
       }
-      delay(15); //change this for speed
+      delay(delayValue); //change this for speed
     }
     
     if ( minAngFound )
@@ -43,12 +45,23 @@ boolean thetaSearch()
       return true;
     }
   
-    phi+=2; //Potential to change phi direction movement
+    phi+=PHI_OFFSET; //Potential to change phi direction movement
     topServo.write(phi); 
-  
-    for ( int theta = MAX_THETA; theta >= MIN_THETA; theta-- )
+    delay(delayValue);
+
+   Serial.print(firstTheta);
+   Serial.print(" ");
+   Serial.println(secondTheta);
+
+   
+    for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
+     Serial.print(theta);
+     Serial.print(" ");
+   Serial.println(firstTheta);
       botServo.write(theta);
+      
+      
       data = analogRead(receiver);  //get signal from RF sent from boat 
       if(data > HIGH_RF_THRESHOLD && !maxAngFound){ //check to see if boat is finding a high
         secondTheta = theta;
@@ -59,18 +72,24 @@ boolean thetaSearch()
         minAngFound = true;
         return true;
       }
-      delay(15);
+      delay(delayValue);
     }
     
     if ( maxAngFound )
+    {
+      Serial.println("hi");
       return true;
+    }
   
-    phi+=2;
+    phi+=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
+    delay(delayValue);
+    
+    Serial.println(phi);
   }  
 
   //Going down on scan grid
-  for(int phi = MAX_PHI; phi >0;){ //Change upper limit for phi
+  for(int phi = 16; phi >0;){ //Change upper limit for phi
     for ( int theta = MIN_THETA; theta < MAX_THETA; theta++ )
     {
       botServo.write(theta);
@@ -84,7 +103,7 @@ boolean thetaSearch()
         maxAngFound = true;
         return true;
       }
-      delay(15); //change this for speed
+      delay(delayValue); //change this for speed
     }
     
     if ( minAngFound )
@@ -92,10 +111,11 @@ boolean thetaSearch()
       return true;
     }
   
-    phi-=2;
+    phi-=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
-  
-    for ( int theta = MAX_THETA; theta >= MIN_THETA; theta-- )
+    delay(delayValue);
+
+    for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
       botServo.write(theta);
       data = analogRead(receiver);  //get signal from RF sent from boat 
@@ -108,13 +128,13 @@ boolean thetaSearch()
         minAngFound = true;
         return true;
       }
-      delay(15);
+      delay(delayValue);
     }
     
     if ( maxAngFound )
       return true;  
   
-    phi-=2;
+    phi-=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
   }
   return false;
