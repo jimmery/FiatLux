@@ -15,6 +15,10 @@
 
 // laser search. 
 
+boolean RFisHIGH( int value )
+{
+  return value < LOW_RF_THRESHOLD;
+}
 
 boolean thetaSearch()
 {
@@ -31,12 +35,12 @@ boolean thetaSearch()
       botServo.write(theta);
      data = analogRead(receiver);  //get signal from RF sent from boat 
       Serial.println(data);
-      if(data > HIGH_RF_THRESHOLD && !minAngFound){ //check to see if boat is finding a high
+      if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
         digitalWrite(laserPin, HIGH);
         firstTheta = theta;
         minAngFound = true;
       }
-      else if(data < LOW_RF_THRESHOLD && minAngFound && !maxAngFound ){
+      else if(!RFisHIGH(data) && minAngFound && !maxAngFound ){
         if ( theta - firstTheta <= NOISECONSTANT )
         {
           minAngFound = false;
@@ -77,12 +81,12 @@ boolean thetaSearch()
       
       data = analogRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
-      if(data > HIGH_RF_THRESHOLD && !maxAngFound){ //check to see if boat is finding a high
+      if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
         digitalWrite(laserPin, HIGH);
         secondTheta = theta;
         maxAngFound = true;
       }
-      else if(data < LOW_RF_THRESHOLD && maxAngFound && !minAngFound ){
+      else if(!RFisHIGH(data) && maxAngFound && !minAngFound ){
         if ( secondTheta - theta <= NOISECONSTANT )
         {
           maxAngFound = false;
@@ -119,12 +123,12 @@ boolean thetaSearch()
       botServo.write(theta);
       data = analogRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
-      if(data > HIGH_RF_THRESHOLD && !minAngFound){ //check to see if boat is finding a high
+      if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
         digitalWrite(laserPin, HIGH);
         firstTheta = theta;
         minAngFound = true;
       }
-      else if(data < LOW_RF_THRESHOLD && minAngFound && !maxAngFound ){
+      else if(!RFisHIGH(data) && minAngFound && !maxAngFound ){
         if ( theta - firstTheta <= NOISECONSTANT )
         {
           minAngFound = false;
@@ -155,12 +159,12 @@ boolean thetaSearch()
       botServo.write(theta);
       data = analogRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
-      if(data > HIGH_RF_THRESHOLD && !maxAngFound){ //check to see if boat is finding a high
+      if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
         digitalWrite(laserPin, HIGH);
         secondTheta = theta;
         maxAngFound = true;
       }
-      else if(data < LOW_RF_THRESHOLD && maxAngFound && !minAngFound ){
+      else if(!RFisHIGH(data) && maxAngFound && !minAngFound ){
         if ( secondTheta - theta <= NOISECONSTANT )
         {
           maxAngFound = false;
