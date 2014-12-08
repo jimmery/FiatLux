@@ -19,7 +19,7 @@
 #define lightReceiver A0
 #define laserPin 2
 #define LEDPin 13
-#define RFoutput 4
+#define pinSignal 4
 
 
 const int SAMPING_NUM = 50;
@@ -38,10 +38,10 @@ void setup(){
  pinMode(lightReceiver, INPUT);
  pinMode(LEDPin, OUTPUT);
  pinMode(laserPin, OUTPUT);
- pinMode(RFoutput, OUTPUT);
+ pinMode(pinSignal, OUTPUT);
  
  digitalWrite(laserPin, HIGH);
- digitalWrite(RFoutput, LOW);
+ digitalWrite(pinSignal, LOW);
  
  for(int i = 0; i< SAMPING_NUM; i++){  //if 50 values is too large we can decrease this so as to not have neg int vals 
     lightData = analogRead(lightReceiver);
@@ -60,18 +60,18 @@ void loop(){
 
   //Laser code
   if(transmitHigh){
-     digitalWrite(RFoutput, HIGH); 
+     digitalWrite(pinSignal, HIGH); 
       Serial.println("transmit HIGH");
 
   }else{
       if(executeLaserCode){
         if(lightData > LASER_BASELINE){
-            digitalWrite(RFoutput, HIGH); 
+            digitalWrite(pinSignal, HIGH); 
             Serial.println("laser HIGH");
 
             transmitHigh = true;
           }else{
-            digitalWrite(RFoutput, LOW); 
+            digitalWrite(pinSignal, LOW); 
              Serial.println("laser LOW");
 
           }
@@ -80,7 +80,7 @@ void loop(){
   //Once baseline is found we want to check for the LED on the boat and then signal HIGH
       lightData = analogRead(lightReceiver);
       if(lightData > lightBaseline) { //this means we are getting data from non-ambient light
-        digitalWrite(RFoutput, HIGH); //transmit high to signal lighthouse that first theta has been found
+        digitalWrite(pinSignal, HIGH); //transmit high to signal lighthouse that first theta has been found
          Serial.println("led HIGH");
 
         LEDHigh = true;
@@ -91,7 +91,7 @@ void loop(){
           executeLaserCode = true;
           LEDHigh = false; 
         } 
-         digitalWrite(RFoutput, LOW);  
+         digitalWrite(pinSignal, LOW);  
          Serial.println("led LOW");
 
       }
