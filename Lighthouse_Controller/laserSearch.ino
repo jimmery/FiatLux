@@ -36,7 +36,7 @@ boolean laserSearch()
   }  
 
   //Going down on scan grid
-  for(int phi = 16; phi >0;){ //Change upper limit for phi
+  for(int phi = MAX_PHI; phi > MIN_PHI;){ //Change upper limit for phi
     for ( int theta = MIN_THETA; theta < MAX_THETA; theta++ )
     {
       botServo.write(theta);
