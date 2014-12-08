@@ -1,3 +1,5 @@
+#include <DmxSimple.h>
+
 #include <Servo.h>
 
 #define receiver A0 //RF receiver
@@ -10,9 +12,9 @@
 const int delayValue = 15;
 const int NOISECONSTANT = 8;
 const int PHI_OFFSET = 2;
-const int MIN_PHI = 35;
-const int MAX_PHI = 80;
-const int MAX_THETA = 180;  
+const int MIN_PHI = 0;
+const int MAX_PHI = 16;
+const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
 const int HIGH_RF_THRESHOLD = 800;
 
@@ -69,7 +71,7 @@ void loop()
     }
     data = analogRead(receiver);
     Serial.println(data);
-    delay(4000);
+    delay(1000);
     // else do nothing. program stops here.
   }
 
