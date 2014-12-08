@@ -16,7 +16,6 @@ const int MIN_PHI = 0;
 const int MAX_PHI = 16;
 const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
-const int HIGH_RF_THRESHOLD = 800;
 
 int MIN_THETA = 0; 
 int data = 0; //data input from RF 
@@ -93,10 +92,7 @@ void loop()
 
 boolean RFisHIGH( int value )
 {
-  if (ledSearching)
-    return value < LOW_RF_THRESHOLD;
-  else
-    return value < HIGH_RF_THRESHOLD;
+  return value < LOW_RF_THRESHOLD;
 }
 
 
