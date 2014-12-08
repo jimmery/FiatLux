@@ -16,7 +16,7 @@
 
 // when receiving a much higher value (for the laser), transmit a signal to stop the lighthouse. 
 
-#define lightReceiver A3
+#define lightReceiver A0
 #define laserPin 2
 #define LEDPin 13
 #define RFoutput 4
@@ -25,7 +25,7 @@
 const int SAMPING_NUM = 50;
 const int BASELINE_OFFSET = 20; //change based on need
 const int LASER_BASELINE = 600; //change value for laser code
-const int NOISE_CONSTANT = ;
+const int NOISE_CONSTANT = 0;
 int lightData = 0;
 int lightBaseline = 0; //this will be set to the averaged ambient value
 
