@@ -14,7 +14,7 @@ const int MIN_PHI = 35;
 const int MAX_PHI = 80;
 const int MAX_THETA = 180;  
 const int LOW_RF_THRESHOLD = 100;
-const int HIGH_RF_THRESHOLD = 100;
+const int HIGH_RF_THRESHOLD = 800;
 
 int MIN_THETA = 0; 
 int data = 0; //data input from RF 
@@ -23,7 +23,7 @@ int firstTheta = 0;
 int secondTheta = 180;
 
 boolean searchComplete = false;
-
+boolean ledSearching = true;
 
 Servo botServo;
 Servo topServo;
@@ -59,7 +59,8 @@ void loop()
   Serial.print(firstTheta);
   Serial.print(" ");
   Serial.println(secondTheta);
-  delay(1000);
+  delay(10000);
+  ledSearching = false;
   while (true)
   {
     if ( !searchComplete )
@@ -90,7 +91,10 @@ void loop()
 
 boolean RFisHIGH( int value )
 {
-  return value < LOW_RF_THRESHOLD;
+  if (ledSearching)
+    return value < LOW_RF_THRESHOLD;
+  else
+    return value < HIGH_RF_THRESHOLD;
 }
 
 
