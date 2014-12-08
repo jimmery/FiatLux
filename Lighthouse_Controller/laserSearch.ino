@@ -5,7 +5,7 @@ boolean laserSearch()
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
-     data = analogRead(receiver);  //get signal from RF sent from boat 
+     data = digitalRead(receiver);  //get signal from RF sent from boat 
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
         return true;
@@ -20,7 +20,7 @@ boolean laserSearch()
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
       botServo.write(theta);
-      data = analogRead(receiver);  //get signal from RF sent from boat  
+      data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
         return true;
@@ -40,7 +40,7 @@ boolean laserSearch()
     for ( int theta = MIN_THETA; theta < MAX_THETA; theta++ )
     {
       botServo.write(theta);
-      data = analogRead(receiver);  //get signal from RF sent from boat  
+      data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
         return true;
@@ -55,7 +55,7 @@ boolean laserSearch()
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
       botServo.write(theta);
-      data = analogRead(receiver);  //get signal from RF sent from boat  
+      data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
         return true;

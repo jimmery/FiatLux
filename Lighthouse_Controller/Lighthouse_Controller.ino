@@ -2,7 +2,7 @@
 
 #include <Servo.h>
 
-#define receiver A0 //RF receiver
+#define receiver 12 //RF receiver
 #define laserPin 4
 #define signalLEDPin 2
 #define bottomServo 9
@@ -92,7 +92,7 @@ void loop()
 
 boolean RFisHIGH( int value )
 {
-  return value < LOW_RF_THRESHOLD;
+  return (digitalRead(receiver) == HIGH);
 }
 
 
