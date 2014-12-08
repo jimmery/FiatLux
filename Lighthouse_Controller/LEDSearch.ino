@@ -15,11 +15,6 @@
 
 // laser search. 
 
-boolean RFisHIGH( int value )
-{
-  return value < LOW_RF_THRESHOLD;
-}
-
 boolean thetaSearch()
 {
   bool minAngFound = false; //use this to get out of loops when angles are found
@@ -105,7 +100,7 @@ boolean thetaSearch()
     
     if ( maxAngFound )
     {
-      Serial.println("hi");
+      //Serial.println("hi");
       return true;
     }
   
