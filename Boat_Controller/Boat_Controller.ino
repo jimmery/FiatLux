@@ -19,12 +19,12 @@
 #define lightReceiver A0
 #define laserPin 2
 #define LEDPin 13
-#define pinSignal 4
+#define RFoutput 4
 
 
 const int SAMPING_NUM = 50;
-const int BASELINE_OFFSET = 20; //change based on need
-const int LASER_BASELINE = 600; //change value for laser code
+const int BASELINE_OFFSET = 10; //change based on need
+const int LASER_BASELINE = 550; //change value for laser code
 const int NOISE_CONSTANT = 0;
 int lightData = 0;
 int lightBaseline = 0; //this will be set to the averaged ambient value
@@ -38,10 +38,10 @@ void setup(){
  pinMode(lightReceiver, INPUT);
  pinMode(LEDPin, OUTPUT);
  pinMode(laserPin, OUTPUT);
- pinMode(pinSignal, OUTPUT);
+ pinMode(RFoutput, OUTPUT);
  
  digitalWrite(laserPin, HIGH);
- digitalWrite(pinSignal, LOW);
+ digitalWrite(RFoutput, LOW);
  
  for(int i = 0; i< SAMPING_NUM; i++){  //if 50 values is too large we can decrease this so as to not have neg int vals 
     lightData = analogRead(lightReceiver);
@@ -60,18 +60,18 @@ void loop(){
 
   //Laser code
   if(transmitHigh){
-     digitalWrite(pinSignal, HIGH); 
+     digitalWrite(RFoutput, HIGH); 
       Serial.println("transmit HIGH");
 
   }else{
       if(executeLaserCode){
         if(lightData > LASER_BASELINE){
-            digitalWrite(pinSignal, HIGH); 
+            digitalWrite(RFoutput, HIGH); 
             Serial.println("laser HIGH");
 
             transmitHigh = true;
           }else{
-            digitalWrite(pinSignal, LOW); 
+            digitalWrite(RFoutput, LOW); 
              Serial.println("laser LOW");
 
           }
@@ -80,7 +80,7 @@ void loop(){
   //Once baseline is found we want to check for the LED on the boat and then signal HIGH
       lightData = analogRead(lightReceiver);
       if(lightData > lightBaseline) { //this means we are getting data from non-ambient light
-        digitalWrite(pinSignal, HIGH); //transmit high to signal lighthouse that first theta has been found
+        digitalWrite(RFoutput, HIGH); //transmit high to signal lighthouse that first theta has been found
          Serial.println("led HIGH");
 
         LEDHigh = true;
@@ -91,7 +91,7 @@ void loop(){
           executeLaserCode = true;
           LEDHigh = false; 
         } 
-         digitalWrite(pinSignal, LOW);  
+         digitalWrite(RFoutput, LOW);  
          Serial.println("led LOW");
 
       }
