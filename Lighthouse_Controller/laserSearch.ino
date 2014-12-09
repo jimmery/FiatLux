@@ -1,21 +1,23 @@
 boolean laserSearch()
 {
   //Going up on scan grid 
-  for(int phi = MIN_PHI; phi < MAX_PHI;){ 
+  for(int phi = LASER_MIN_PHI; phi < LASER_MAX_PHI;){ 
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
      data = digitalRead(receiver);  //get signal from RF sent from boat 
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
+        botServo.write(theta-1);
         return true;
       }
-      delay(delayValue); //change this for speed
+      delay(LASER_DELAY); //change this for speed
     }
   
-    phi+=PHI_OFFSET; //Potential to change phi direction movement
+    phi+=LASER_PHI_OFFSET; //Potential to change phi direction movement
     topServo.write(phi); 
-    delay(delayValue);
+    delay(LASER_DELAY);
+    digitalWrite(laserPin, HIGH);
     
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
@@ -23,34 +25,41 @@ boolean laserSearch()
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
+        botServo.write(theta+1);
         return true;
       }
-      delay(delayValue);
+      delay(LASER_DELAY);
     }
   
-    phi+=PHI_OFFSET;
+    phi+=LASER_PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
-    delay(delayValue);
+    delay(LASER_DELAY);
     
     //Serial.println(phi);
-  }  
+  }
+
+  if ( firstTheta > 0 )
+    firstTheta--;
+  if ( secondTheta < MAX_THETA )
+    secondTheta++;  
 
   //Going down on scan grid
-  for(int phi = MAX_PHI; phi >0;){ //Change upper limit for phi
-    for ( int theta = MIN_THETA; theta < MAX_THETA; theta++ )
+  for(int phi = LASER_MAX_PHI; phi > LASER_MIN_PHI;){ //Change upper limit for phi
+    for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
+        botServo.write(theta - 1);
         return true;
       }
-      delay(delayValue); //change this for speed
+      delay(LASER_DELAY); //change this for speed
     }
   
-    phi-=PHI_OFFSET;
+    phi-=LASER_PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
-    delay(delayValue);
+    delay(LASER_DELAY);
 
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
@@ -58,13 +67,19 @@ boolean laserSearch()
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data)){ //check to see if boat is finding a high
+        botServo.write(theta + 1);
         return true;
       }
-      delay(delayValue);
+      delay(LASER_DELAY);
     }
   
-    phi-=PHI_OFFSET;
+    phi-=LASER_PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
+    delay(LASER_DELAY);
   }
+  if ( firstTheta > 0 )
+    firstTheta--;
+  if ( secondTheta < MAX_THETA )
+    secondTheta++;
   return false;
 }

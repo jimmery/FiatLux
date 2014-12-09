@@ -31,7 +31,7 @@ boolean thetaSearch()
      data = digitalRead(receiver);  //get signal from RF sent from boat 
       Serial.println(data);
       if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
-        digitalWrite(laserPin, HIGH);
+        //digitalWrite(laserPin, HIGH);
         firstTheta = theta;
         minAngFound = true;
       }
@@ -43,7 +43,7 @@ boolean thetaSearch()
         }
         else
         {
-          digitalWrite(laserPin, LOW);
+          //digitalWrite(laserPin, LOW);
           secondTheta = theta;
           maxAngFound = true;
           return true;
@@ -60,6 +60,9 @@ boolean thetaSearch()
     phi+=PHI_OFFSET; //Potential to change phi direction movement
     topServo.write(phi); 
     delay(delayValue);
+    
+    digitalWrite(signalLEDPin, HIGH);
+    
 //
 //   Serial.print(firstTheta);
 //   Serial.print(" ");
@@ -77,7 +80,7 @@ boolean thetaSearch()
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
-        digitalWrite(laserPin, HIGH);
+        //digitalWrite(laserPin, HIGH);
         secondTheta = theta;
         maxAngFound = true;
       }
@@ -89,7 +92,7 @@ boolean thetaSearch()
         }
         else
         {
-          digitalWrite(laserPin, LOW);
+          //digitalWrite(laserPin, LOW);
           firstTheta = theta;
           minAngFound = true;
           return true;
@@ -119,7 +122,7 @@ boolean thetaSearch()
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
-        digitalWrite(laserPin, HIGH);
+        //digitalWrite(laserPin, HIGH);
         firstTheta = theta;
         minAngFound = true;
       }
@@ -131,7 +134,7 @@ boolean thetaSearch()
         }
         else
         {
-          digitalWrite(laserPin, LOW);
+          //digitalWrite(laserPin, LOW);
           secondTheta = theta;
           maxAngFound = true;
           return true;
@@ -155,7 +158,7 @@ boolean thetaSearch()
       data = digitalRead(receiver);  //get signal from RF sent from boat  
       Serial.println(data);
       if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
-        digitalWrite(laserPin, HIGH);
+        //digitalWrite(laserPin, HIGH);
         secondTheta = theta;
         maxAngFound = true;
       }
@@ -167,7 +170,7 @@ boolean thetaSearch()
         }
         else
         {
-          digitalWrite(laserPin, LOW);
+          //digitalWrite(laserPin, LOW);
           firstTheta = theta;
           minAngFound = true;
           return true;
