@@ -24,7 +24,7 @@ boolean thetaSearch()
   secondTheta = MAX_THETA;
   
   //Going up on scan grid 
-  for(int phi = 0; phi < 16;){ 
+  for(int phi = MIN_PHI; phi < MAX_PHI;){ 
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
@@ -112,7 +112,7 @@ boolean thetaSearch()
   }  
 
   //Going down on scan grid
-  for(int phi = 16; phi >0;){ //Change upper limit for phi
+  for(int phi = MAX_PHI; phi >0;){ //Change upper limit for phi
     for ( int theta = MIN_THETA; theta < MAX_THETA; theta++ )
     {
       botServo.write(theta);

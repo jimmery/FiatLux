@@ -12,8 +12,8 @@
 const int delayValue = 15;
 const int NOISECONSTANT = 8;
 const int PHI_OFFSET = 2;
-const int MIN_PHI = 0;
-const int MAX_PHI = 16;
+const int MIN_PHI = 60;
+const int MAX_PHI = 90;
 const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
 
