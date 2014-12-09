@@ -68,7 +68,7 @@ void loop()
     {
       searchComplete = laserSearch();
     }
-    data = analogRead(receiver);
+    data = digitalRead(receiver);
     Serial.println(data);
     delay(1000);
     // else do nothing. program stops here.
