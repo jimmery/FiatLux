@@ -1,4 +1,4 @@
-#include <Servo.h>
+#include <Servo.h> //library
 
 #define receiver 7 //RF receiver
 #define laserPin 4
