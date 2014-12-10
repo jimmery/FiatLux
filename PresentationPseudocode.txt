@@ -1,5 +1,6 @@
 Boat: 
 
+discover value of ambient light and set as baseline
 search for an LED light signal:
   transmit HIGH when LED signals are present.
 search for a laser signal: 
