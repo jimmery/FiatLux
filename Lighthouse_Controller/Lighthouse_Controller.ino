@@ -9,25 +9,25 @@
 #define LEDPin 13
 
 // constants, mainly for the LED search. 
-const int delayValue = 25;
-const int NOISECONSTANT = 6;
-const int PHI_OFFSET = 4;
-const int MIN_PHI = 35;
-const int MAX_PHI = 75;
-const int MIN_THETA = 0;
-const int MAX_THETA = 180;
-const int LOW_RF_THRESHOLD = 100;
-const int HIGH_PHI_COMPENSATION = 5;
-const int PHI_THRESHOLD = 50;
-const int PHI_BUBBLE = 12;
+const int delayValue = 25;             // LED search speed. 
+const int NOISECONSTANT = 6;           // constant by which less than this value of HIGHS would be considered noise.
+const int PHI_OFFSET = 4;              // change in LED phi after a full 180 scan on one phi
+const int MIN_PHI = 35;                // minimum LED phi
+const int MAX_PHI = 75;                // maximum LED phi
+const int MIN_THETA = 0;               // minimum theta (for both)
+const int MAX_THETA = 180;             // maximum theta (for both)
+const int LOW_RF_THRESHOLD = 100;      // threshold for RF (which was scrapped - this constant is useless)
+const int HIGH_PHI_COMPENSATION = 5;   // if phi is high, we add this value to left and right theta.
+const int PHI_THRESHOLD = 50;          // above this phi, we consider the phi to be high. 
+const int PHI_BUBBLE = 12;             // the bubble in which we guess the phototransistor to be after the LED search.
 
 // constants, mainly for the laser search. 
-const int LASER_PHI_OFFSET = 1;
-const int LASER_DELAY = 40;
-const int LASER_MIN_PHI = 25;
-const int LASER_MAX_PHI = 75;
-const int LASER_COMPENSATION = 3;
-const int PHI_COMPENSATION = 2;
+const int LASER_PHI_OFFSET = 1;        // change in laser phi after a full 180 theta scan.
+const int LASER_DELAY = 40;            // laser search speed.
+const int LASER_MIN_PHI = 25;          // minimum laser phi.
+const int LASER_MAX_PHI = 75;          // maximum laser phi
+const int LASER_COMPENSATION = 3;      // increase in theta values if one full search fails
+const int PHI_COMPENSATION = 2;        // increase in phi values if one full search fails.
 
 int data = 0; //data input from RF 
 
@@ -66,9 +66,6 @@ void loop()
 {
   while (!thetaSearch());
   digitalWrite(signalLEDPin, LOW);
-  Serial.print(firstTheta);
-  Serial.print(" ");
-  Serial.println(secondTheta);
   delay(4000);
   ledSearching = false;
   while (true)

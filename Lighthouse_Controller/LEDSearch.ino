@@ -1,5 +1,9 @@
-
-
+// purely does the entire theta search. 
+// takes the modified and saved theta and phi values and loops through there. 
+// each spot we search and listen for inputs. 
+// then we return true if it's found, and saves the theta values it has.
+// also does some compensation based on the values that it gets.
+// otherwise we increase the grid area and continue searching. 
 boolean thetaSearch()
 {
   boolean minAngFound = false; //use this to get out of loops when angles are found

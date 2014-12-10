@@ -1,10 +1,15 @@
+// purely does the entire laser search. 
+// takes the modified and saved theta and phi values and loops through there. 
+// each spot we search and listen for inputs. 
+// then we return true if it's found,
+// otherwise we increase the grid area and continue searching. 
 boolean laserSearch()
 {
   //Going up on scan grid 
   for(int phi = firstPhi; phi < secondPhi;){ 
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
-      if (runLaserSearch(theta))
+      if (searchAtTheta(theta))
         return true;
       delay(LASER_DELAY); //change this for speed
     }
@@ -16,7 +21,7 @@ boolean laserSearch()
     
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
-      if (runLaserSearch(theta))
+      if (searchAtTheta(theta))
         return true;
       delay(LASER_DELAY);
     }
@@ -24,8 +29,6 @@ boolean laserSearch()
     phi+=LASER_PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
     delay(LASER_DELAY);
-    
-    //Serial.println(phi);
   }
 
   increaseScanGrid();
@@ -34,7 +37,7 @@ boolean laserSearch()
   for(int phi = secondPhi; phi > firstPhi;){ //Change upper limit for phi
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
-      if (runLaserSearch(theta))
+      if (searchAtTheta(theta))
         return true;
       delay(LASER_DELAY); //change this for speed
     }
@@ -45,7 +48,7 @@ boolean laserSearch()
 
     for ( int theta = secondTheta; theta >= firstTheta; theta-- )
     {
-      if (runLaserSearch(theta))
+      if (searchAtTheta(theta))
         return true;
       delay(LASER_DELAY);
     }
@@ -55,9 +58,13 @@ boolean laserSearch()
     delay(LASER_DELAY);
   }
   increaseScanGrid();
-  return false;
+  return false; // indicates that we should continue searching. 
 }
 
+// this increases the area of our scan area. 
+// this ensures that even under some sort of search failure, 
+// we can still get back to a state where the item can be found
+// eventually. 
 void increaseScanGrid()
 {
   firstTheta -= LASER_COMPENSATION;
@@ -74,13 +81,15 @@ void increaseScanGrid()
     secondPhi = LASER_MAX_PHI;
 }
 
-boolean runLaserSearch( int theta )
+// writes theta and checks boat for inputs. 
+// returns true when there is an input, and therefore the laser has found the boat.
+// otherwise returns false, indicating the code to continue searching. 
+boolean searchAtTheta( int theta )
 {
   botServo.write(theta);
   data = digitalRead(receiver);  //get signal from RF sent from boat  
   Serial.println(data);
   if(RFisHIGH(data)){ //check to see if boat is finding a high
-    botServo.write(theta + 1);
     return true;
   }
   return false;
