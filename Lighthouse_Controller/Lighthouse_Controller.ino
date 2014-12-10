@@ -10,15 +10,15 @@
 const int delayValue = 25;
 const int NOISECONSTANT = 6;
 const int PHI_OFFSET = 2;
-const int MIN_PHI = 60;
+const int MIN_PHI = 35;
 const int MAX_PHI = 75;
 const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
 
 const int LASER_PHI_OFFSET = 1;
 const int LASER_DELAY = 40;
-const int LASER_MIN_PHI = 45;
-const int LASER_MAX_PHI = 90;
+const int LASER_MIN_PHI = 25;
+const int LASER_MAX_PHI = 75;
 
 int MIN_THETA = 0; 
 int data = 0; //data input from RF 
