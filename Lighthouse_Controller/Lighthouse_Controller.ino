@@ -17,17 +17,21 @@ const int MAX_THETA = 180;
 const int LOW_RF_THRESHOLD = 100;
 const int HIGH_PHI_COMPENSATION = 5;
 const int PHI_THRESHOLD = 50;
+const int PHI_BUBBLE = 10;
 
 const int LASER_PHI_OFFSET = 1;
 const int LASER_DELAY = 40;
 const int LASER_MIN_PHI = 25;
 const int LASER_MAX_PHI = 75;
 const int LASER_COMPENSATION = 3;
+const int PHI_COMPENSATION = 2;
  
 int data = 0; //data input from RF 
 
-int firstTheta = 0;
-int secondTheta = 180;
+int firstTheta = MIN_THETA;
+int secondTheta = MAX_THETA;
+int firstPhi = MIN_PHI;
+int secondPhi = MAX_PHI;
 
 boolean searchComplete = false;
 boolean ledSearching = true;
