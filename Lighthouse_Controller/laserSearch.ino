@@ -1,7 +1,7 @@
 boolean laserSearch()
 {
   //Going up on scan grid 
-  for(int phi = firstPhi; phi < secondPhi;){ 
+  for(int phi = LASER_MIN_PHI; phi < LASER_MAX_PHI;){ 
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
@@ -40,19 +40,13 @@ boolean laserSearch()
 
   firstTheta -= LASER_COMPENSATION;
   secondTheta += LASER_COMPENSATION;
-  firstPhi -= PHI_COMPENSATION;
-  secondPhi += PHI_COMPENSATION;
-  if ( firstTheta < MIN_THETA )
-    firstTheta = MIN_THETA;
+  if ( firstTheta < 0 )
+    firstTheta = 0;
   if ( secondTheta > MAX_THETA )
-    secondTheta = MAX_THETA; 
-  if ( firstTheta < LASER_MIN_PHI )
-    firstTheta = LASER_MIN_PHI;
-  if ( secondTheta > LASER_MAX_PHI );
-    secondTheta = LASER_MAX_PHI; 
+    secondTheta = MAX_THETA;  
 
   //Going down on scan grid
-  for(int phi = secondPhi; phi > firstPhi;){ //Change upper limit for phi
+  for(int phi = LASER_MAX_PHI; phi > LASER_MIN_PHI;){ //Change upper limit for phi
     for ( int theta = firstTheta; theta < secondTheta; theta++ )
     {
       botServo.write(theta);
@@ -87,15 +81,9 @@ boolean laserSearch()
   }
   firstTheta -= LASER_COMPENSATION;
   secondTheta += LASER_COMPENSATION;
-  firstPhi -= PHI_COMPENSATION;
-  secondPhi += PHI_COMPENSATION;
-  if ( firstTheta < MIN_THETA )
-    firstTheta = MIN_THETA;
+  if ( firstTheta < 0 )
+    firstTheta = 0;
   if ( secondTheta > MAX_THETA )
     secondTheta = MAX_THETA; 
-  if ( firstTheta < LASER_MIN_PHI )
-    firstTheta = LASER_MIN_PHI;
-  if ( secondTheta > LASER_MAX_PHI );
-    secondTheta = LASER_MAX_PHI;
   return false;
 }

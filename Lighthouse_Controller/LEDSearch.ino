@@ -58,12 +58,6 @@ boolean thetaSearch()
               secondTheta = MAX_THETA;
           }
           maxAngFound = true;
-          firstPhi = phi - PHI_BUBBLE;
-          secondPhi = phi + PHI_BUBBLE;
-          if ( firstPhi < LASER_MIN_PHI )
-            firstPhi = LASER_MIN_PHI;
-          if ( secondPhi > LASER_MAX_PHI )
-            secondPhi = LASER_MAX_PHI;
           return true;
         }
       }
@@ -72,12 +66,6 @@ boolean thetaSearch()
     
     if ( minAngFound )
     {
-      firstPhi = phi - PHI_BUBBLE;
-      secondPhi = phi + PHI_BUBBLE;
-      if ( firstPhi < LASER_MIN_PHI )
-        firstPhi = LASER_MIN_PHI;
-      if ( secondPhi > LASER_MAX_PHI )
-        secondPhi = LASER_MAX_PHI;
       return true;
     }
   
@@ -131,12 +119,6 @@ boolean thetaSearch()
               firstTheta = 0;
           }
           minAngFound = true;
-          firstPhi = phi - PHI_BUBBLE;
-          secondPhi = phi + PHI_BUBBLE;
-          if ( firstPhi < LASER_MIN_PHI )
-            firstPhi = LASER_MIN_PHI;
-          if ( secondPhi > LASER_MAX_PHI )
-            secondPhi = LASER_MAX_PHI;
           return true;
         }
       }
@@ -146,12 +128,6 @@ boolean thetaSearch()
     if ( maxAngFound )
     {
       //Serial.println("hi");
-      firstPhi = phi - PHI_BUBBLE;
-      secondPhi = phi + PHI_BUBBLE;
-      if ( firstPhi < LASER_MIN_PHI )
-        firstPhi = LASER_MIN_PHI;
-      if ( secondPhi > LASER_MAX_PHI )
-        secondPhi = LASER_MAX_PHI;
       return true;
     }
   
@@ -197,12 +173,6 @@ boolean thetaSearch()
               secondTheta = MAX_THETA;
           }
           maxAngFound = true;
-          firstPhi = phi - PHI_BUBBLE;
-          secondPhi = phi + PHI_BUBBLE;
-          if ( firstPhi < LASER_MIN_PHI )
-            firstPhi = LASER_MIN_PHI;
-          if ( secondPhi > LASER_MAX_PHI )
-            secondPhi = LASER_MAX_PHI;
           return true;
         }
       }
@@ -211,12 +181,6 @@ boolean thetaSearch()
     
     if ( minAngFound )
     {
-      firstPhi = phi - PHI_BUBBLE;
-      secondPhi = phi + PHI_BUBBLE;
-      if ( firstPhi < LASER_MIN_PHI )
-        firstPhi = LASER_MIN_PHI;
-      if ( secondPhi > LASER_MAX_PHI )
-        secondPhi = LASER_MAX_PHI;
       return true;
     }
   
@@ -257,12 +221,6 @@ boolean thetaSearch()
               firstTheta = 0;
           }
           minAngFound = true;
-          firstPhi = phi - PHI_BUBBLE;
-          secondPhi = phi + PHI_BUBBLE;
-          if ( firstPhi < LASER_MIN_PHI )
-            firstPhi = LASER_MIN_PHI;
-          if ( secondPhi > LASER_MAX_PHI )
-            secondPhi = LASER_MAX_PHI;
           return true;
         }
       }
@@ -270,16 +228,7 @@ boolean thetaSearch()
     }
     
     if ( maxAngFound )
-    {
-      firstPhi = phi - PHI_BUBBLE;
-      secondPhi = phi + PHI_BUBBLE;
-      if ( firstPhi < LASER_MIN_PHI )
-        firstPhi = LASER_MIN_PHI;
-      if ( secondPhi > LASER_MAX_PHI )
-        secondPhi = LASER_MAX_PHI;
       return true;  
-    }
-    
   
     phi-=PHI_OFFSET;
     topServo.write(phi); //Change this increment for phi direction 
