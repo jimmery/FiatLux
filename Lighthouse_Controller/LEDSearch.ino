@@ -33,6 +33,12 @@ boolean thetaSearch()
       if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
         //digitalWrite(laserPin, HIGH);
         firstTheta = theta;
+        if ( phi > PHI_THRESHOLD )
+        {
+          firstTheta -= HIGH_PHI_COMPENSATION;
+          if ( firstTheta < 0 )
+            firstTheta = 0;
+        }
         minAngFound = true;
       }
       else if(!RFisHIGH(data) && minAngFound && !maxAngFound ){
@@ -45,6 +51,12 @@ boolean thetaSearch()
         {
           //digitalWrite(laserPin, LOW);
           secondTheta = theta;
+          if ( phi > PHI_THRESHOLD )
+          {
+            secondTheta += HIGH_PHI_COMPENSATION;
+            if ( secondTheta > MAX_THETA )
+              secondTheta = MAX_THETA;
+          }
           maxAngFound = true;
           return true;
         }
@@ -82,6 +94,12 @@ boolean thetaSearch()
       if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
         //digitalWrite(laserPin, HIGH);
         secondTheta = theta;
+        if ( phi > PHI_THRESHOLD )
+        {
+          secondTheta += HIGH_PHI_COMPENSATION;
+          if ( secondTheta > MAX_THETA )
+            secondTheta = MAX_THETA;
+        }
         maxAngFound = true;
       }
       else if(!RFisHIGH(data) && maxAngFound && !minAngFound ){
@@ -93,7 +111,13 @@ boolean thetaSearch()
         else
         {
           //digitalWrite(laserPin, LOW);
-          firstTheta = theta;
+          firstTheta = theta;        
+          if ( phi > PHI_THRESHOLD )
+          {
+            firstTheta -= HIGH_PHI_COMPENSATION;
+            if ( firstTheta < 0 )
+              firstTheta = 0;
+          }
           minAngFound = true;
           return true;
         }
@@ -124,6 +148,12 @@ boolean thetaSearch()
       if(RFisHIGH(data) && !minAngFound){ //check to see if boat is finding a high
         //digitalWrite(laserPin, HIGH);
         firstTheta = theta;
+        if ( phi > PHI_THRESHOLD )
+        {
+          firstTheta -= HIGH_PHI_COMPENSATION;
+          if ( firstTheta < 0 )
+            firstTheta = 0;
+        }
         minAngFound = true;
       }
       else if(!RFisHIGH(data) && minAngFound && !maxAngFound ){
@@ -136,6 +166,12 @@ boolean thetaSearch()
         {
           //digitalWrite(laserPin, LOW);
           secondTheta = theta;
+          if ( phi > PHI_THRESHOLD )
+          {
+            secondTheta += HIGH_PHI_COMPENSATION;
+            if ( secondTheta > MAX_THETA )
+              secondTheta = MAX_THETA;
+          }
           maxAngFound = true;
           return true;
         }
@@ -160,6 +196,12 @@ boolean thetaSearch()
       if(RFisHIGH(data) && !maxAngFound){ //check to see if boat is finding a high
         //digitalWrite(laserPin, HIGH);
         secondTheta = theta;
+        if ( phi > PHI_THRESHOLD )
+        {
+          secondTheta += HIGH_PHI_COMPENSATION;
+          if ( secondTheta > MAX_THETA )
+            secondTheta = MAX_THETA;
+        }
         maxAngFound = true;
       }
       else if(!RFisHIGH(data) && maxAngFound && !minAngFound ){
@@ -172,6 +214,12 @@ boolean thetaSearch()
         {
           //digitalWrite(laserPin, LOW);
           firstTheta = theta;
+          if ( phi > PHI_THRESHOLD )
+          {
+            firstTheta -= HIGH_PHI_COMPENSATION;
+            if ( firstTheta < 0 )
+              firstTheta = 0;
+          }
           minAngFound = true;
           return true;
         }

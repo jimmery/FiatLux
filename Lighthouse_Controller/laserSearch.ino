@@ -38,10 +38,12 @@ boolean laserSearch()
     //Serial.println(phi);
   }
 
-  if ( firstTheta > 0 )
-    firstTheta--;
-  if ( secondTheta < MAX_THETA )
-    secondTheta++;  
+  firstTheta -= LASER_COMPENSATION;
+  secondTheta += LASER_COMPENSATION;
+  if ( firstTheta < 0 )
+    firstTheta = 0;
+  if ( secondTheta > MAX_THETA )
+    secondTheta = MAX_THETA;  
 
   //Going down on scan grid
   for(int phi = LASER_MAX_PHI; phi > LASER_MIN_PHI;){ //Change upper limit for phi
@@ -77,9 +79,11 @@ boolean laserSearch()
     topServo.write(phi); //Change this increment for phi direction 
     delay(LASER_DELAY);
   }
-  if ( firstTheta > 0 )
-    firstTheta--;
-  if ( secondTheta < MAX_THETA )
-    secondTheta++;
+  firstTheta -= LASER_COMPENSATION;
+  secondTheta += LASER_COMPENSATION;
+  if ( firstTheta < 0 )
+    firstTheta = 0;
+  if ( secondTheta > MAX_THETA )
+    secondTheta = MAX_THETA; 
   return false;
 }
