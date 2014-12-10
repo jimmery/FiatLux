@@ -1,0 +1,16 @@
+Boat: 
+
+search for an LED light signal:
+  transmit HIGH when LED signals are present.
+search for a laser signal: 
+  transmit HIGH when laser is found. 
+continue to transmit HIGH. 
+
+Search code: 
+
+loop in phi dimension
+  loop in theta dimension
+    if a HIGH signal is received, 
+      record theta values for initial LED search. 
+      tell servos to stop for laser search. 
+    else write the given by phi and theta. 
