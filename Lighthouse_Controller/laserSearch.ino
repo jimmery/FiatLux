@@ -46,10 +46,10 @@ boolean laserSearch()
     firstTheta = MIN_THETA;
   if ( secondTheta > MAX_THETA )
     secondTheta = MAX_THETA; 
-  if ( firstTheta < LASER_MIN_PHI )
-    firstTheta = LASER_MIN_PHI;
-  if ( secondTheta > LASER_MAX_PHI );
-    secondTheta = LASER_MAX_PHI; 
+  if ( firstPhi < LASER_MIN_PHI )
+    firstPhi = LASER_MIN_PHI;
+  if ( secondPhi > LASER_MAX_PHI )
+    secondPhi = LASER_MAX_PHI; 
 
   //Going down on scan grid
   for(int phi = secondPhi; phi > firstPhi;){ //Change upper limit for phi
@@ -93,9 +93,9 @@ boolean laserSearch()
     firstTheta = MIN_THETA;
   if ( secondTheta > MAX_THETA )
     secondTheta = MAX_THETA; 
-  if ( firstTheta < LASER_MIN_PHI )
-    firstTheta = LASER_MIN_PHI;
-  if ( secondTheta > LASER_MAX_PHI );
-    secondTheta = LASER_MAX_PHI;
+  if ( firstPhi < LASER_MIN_PHI )
+    firstPhi = LASER_MIN_PHI;
+  if ( secondPhi > LASER_MAX_PHI )
+    secondPhi = LASER_MAX_PHI;
   return false;
 }
